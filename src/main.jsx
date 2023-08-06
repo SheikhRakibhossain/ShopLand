@@ -10,12 +10,18 @@ import "./index.css";
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import Shop from './components/Shop/Shop';
+import Main from './components/Main/Main';
+import Home from './components/Home/Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <Main></Main>,
     children:[
+      {
+        path:'/',
+        element:<Home></Home>
+      },
       {
         path:'/login',
         element:<Login></Login>

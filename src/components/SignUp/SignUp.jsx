@@ -32,8 +32,8 @@ const SignUp = () => {
                                 <input type='submit' value='Register' className="btn btn-primary" />
                             </div>
                         </form>
-                        <p className='text-green-500'>{success}</p>
-                        <p className='text-red-500'>{error}</p>
+                        {/* <p className='text-green-500'>{success}</p>
+                        <p className='text-red-500'>{error}</p> */}
                     </div>
                 </div>
             </div>
