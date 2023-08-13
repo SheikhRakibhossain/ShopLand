@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Login = () => {
+    const user = useContext(AuthContext);
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
                 <div className="card w-full max-w-sm shadow-2xl">
                     <div className="card-body">
+                        <h2>This is me{user && <p>{user.rakib}</p>}</h2>
                         <form>
                             <div className="form-control">
                                 <label className="label">
@@ -34,9 +37,9 @@ const Login = () => {
                         </form>
                         {/* <p className='text-green-500'>{success}</p>
                         <p className='text-red-500'>{error}</p> */}
-                        <button class="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
-                            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
-                                <span>Login with Google</span>
+                        <button className="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                            <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
+                            <span>Login with Google</span>
                         </button>
                     </div>
                 </div>
