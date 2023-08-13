@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
+import React, {useContext, useState } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const SignUp = () => {
+
+    //user and create user come from central space form authProvider
+    const { user, createUser } = useContext(AuthContext);
+console.log(createUser)
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('')
-    console.log(email, password)
+    console.log(email, password);
 
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
 
-const handleSignUp = (e) =>{
-e.preventDefault();
-const form = e.target;
-const name = form.name.value;
-console.log(email, password, name)
-if(emailError){
-    setEmailError("Your email has error")
-}
+        console.log(email, password, name)
+        if (emailError) {
+            setEmailError("Your email has error")
+        }
 
-}
+    }
 
+    const handleEmail = (e) => {
+        // const emailInput = e.target.email.value;
+        setEmail(e.target.value)
+        console.log(email)
 
-const handleEmail = (e) =>{
+    }
 
-// const emailInput = e.target.email.value;
-setEmail(e.target.value)
-console.log(email)
-
-
-}
-
-const handlePassword = (e) =>{
-    // const passwordInput = e.target.password.value;
-    setPassword(e.target.value);
-}
+    const handlePassword = (e) => {
+        // const passwordInput = e.target.password.value;
+        setPassword(e.target.value);
+        console.log(password)
+    }
 
 
     return (
