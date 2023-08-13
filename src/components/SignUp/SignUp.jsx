@@ -23,6 +23,14 @@ console.log(createUser)
         if (emailError) {
             setEmailError("Your email has error")
         }
+        createUser(email,password)
+        .then(res =>{
+          const  loggedUser = res.user;
+          console.log(loggedUser)
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
 
     }
 

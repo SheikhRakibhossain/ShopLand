@@ -2,20 +2,34 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Login = () => {
-    const user = useContext(AuthContext);
+    const {user, logIn} = useContext(AuthContext);
+    
+
+    const handleLoginIn =(e)=>{
+
+        e.preventDefault();
+        const form = e.target;
+        const email =form.email.value;
+        const password = form.password.value;
+        // console(email, password);
+        logIn(email, password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
+
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
                 <div className="card w-full max-w-sm shadow-2xl">
                     <div className="card-body">
                         <h2>This is me{user && <p>{user.rakib}</p>}</h2>
-                        <form>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input type="text" name='name' placeholder="name" className="input input-bordered" />
-                            </div>
+                        <form onSubmit={handleLoginIn}>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -32,7 +46,7 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <input type='submit' value='Register' className="btn btn-primary" />
+                                <input type='submit' value='SIgn In' className="btn btn-primary" />
                             </div>
                         </form>
                         {/* <p className='text-green-500'>{success}</p>
