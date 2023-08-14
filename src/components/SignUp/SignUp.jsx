@@ -26,7 +26,8 @@ console.log(createUser)
         createUser(email,password)
         .then(res =>{
           const  loggedUser = res.user;
-          console.log(loggedUser)
+          console.log(loggedUser);
+          form.reset();
         })
         .catch(error =>{
             console.log(error.message)
