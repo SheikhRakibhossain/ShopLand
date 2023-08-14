@@ -1,45 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { useNavigate, useLocation } from "react-router-dom";
+import { FaBeer, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
-    const {user, logIn, googleLogin} = useContext(AuthContext);
+    const { user, logIn, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     console.log(location);
-    const from = location.state?.from?.pathname || '/'
-    
+    const from = location.state?.from?.pathname || '/';
+    const [show, setShow] = useState(false);
 
-    const handleLoginIn =(e)=>{
+
+    const handleLoginIn = (e) => {
 
         e.preventDefault();
         const form = e.target;
-        const email =form.email.value;
+        const email = form.email.value;
         const password = form.password.value;
         // console(email, password);
         logIn(email, password)
-        .then(result =>{
-            const loggedUser = result.user;
-            console.log(loggedUser);
-            form.reset();
-            navigate(from, {replace:true})
-        })
-        .catch(error =>{
-            console.log(error.message)
-        })
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                form.reset();
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
 
     }
-    const handleGoogleLogin =()=>{
+    const handleGoogleLogin = () => {
         googleLogin()
-        .then(res=>{
-            const loggedUser = res.user;
-            console.log(loggedUser);
-        })
-        .catch(error =>{
-            console.log(error)
-        })
+            .then(res => {
+                const loggedUser = res.user;
+                console.log(loggedUser);
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
-   
+
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -58,7 +60,16 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                               
+                                <div className=' relative'>
+                                    <input type={show ? "text":"password"} name='password' placeholder="password" className="input input-bordered" required />
+                                    <span onClick={()=>{setShow(!show)}} className='absolute right-2 top-4 cursor-pointer ' >
+                                        {
+                                            show ?<FaEyeSlash/>: <FaEye/>
+                                        }
+                                    </span>
+                                </div>
+
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
