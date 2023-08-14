@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Login = () => {
-    const {user, logIn} = useContext(AuthContext);
+    const {user, logIn, googleLogin} = useContext(AuthContext);
     
 
     const handleLoginIn =(e)=>{
@@ -22,6 +22,16 @@ const Login = () => {
             console.log(error.message)
         })
 
+    }
+    const handleGoogleLogin =()=>{
+        googleLogin()
+        .then(res=>{
+            const loggedUser = res.user;
+            console.log(loggedUser);
+        })
+        .catch(error =>{
+            console.log(error)
+        })
     }
    
 
@@ -53,7 +63,7 @@ const Login = () => {
                         </form>
                         {/* <p className='text-green-500'>{success}</p>
                         <p className='text-red-500'>{error}</p> */}
-                        <button className="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
+                        <button onClick={handleGoogleLogin} className="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
                             <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo" />
                             <span>Login with Google</span>
                         </button>
